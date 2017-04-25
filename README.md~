@@ -27,8 +27,6 @@ Copyright 2017 Aldrin I. Racelis
 
 No Dependencies
 
-## Issues or Bugs
-
 ## Build
 
 After cloning the repository, build the file using cmake and make. 
@@ -49,6 +47,4 @@ Unit tests made with gtest verfied the functions of both the game and gameBoard 
 	test/cpp-test
 	
 The unit tests are integrated with Travis, as seen by the badge at the top of the readme.
-
-## API 
 	
