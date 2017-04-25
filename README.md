@@ -5,7 +5,7 @@
 
 ## SIP
 
-<a href="https://drive.google.com/open?id=1vPMsvtIHx467KGZdfskSs1heT60qLzy87K0tlMnckY4">SIP Logs</a>
+<a href="https://drive.google.com/open?id=1vPMsvtIHx467KGZdfskSs1heT60qLzy87K0tlMnckY4">SIP and Sprint Logs</a>
 
 ## License
 
