@@ -1,20 +1,13 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(robot_path_planning)
+project(rl_msgs)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  rospy
   std_msgs
-  geometry_msgs
-  sensor_msgs
-  turtlebot_gazebo
-  gazebo_ros
+  message_generation
 )
-
-find_package(gazebo REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -50,11 +43,14 @@ find_package(gazebo REQUIRED)
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  RLAction.msg
+  RLEnvDescription.msg
+  RLEnvSeedExperience.msg
+  RLExperimentInfo.msg
+  RLStateReward.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -72,10 +68,8 @@ find_package(gazebo REQUIRED)
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
-  DEPENDENCIES
-  std_msgs
-  geometry_msgs
-  sensor_msgs
+ DEPENDENCIES
+ std_msgs
 )
 
 ###################################
@@ -88,11 +82,10 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-  DEPENDS 
-  gazebo_ros
 #  INCLUDE_DIRS include
-#  LIBRARIES robot_path_planning
-  CATKIN_DEPENDS roscpp rospy std_msgs geometry_msgs sensor_msgs gazebo_ros
+#  LIBRARIES rgbd_tools
+#  CATKIN_DEPENDS roscpp rospy std_msgs
+   CATKIN_DEPENDS message_runtime
 #  DEPENDS system_lib
 )
 
@@ -105,24 +98,30 @@ catkin_package(
 # include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
-  ${GAZEBO_INCLUDE_DIRS}
 )
 
 ## Declare a cpp library
-# add_library(robot_path_planning
-#   src/${PROJECT_NAME}/robot_path_planning.cpp
+# add_library(rgbd_tools
+#   src/${PROJECT_NAME}/
 # )
 
 ## Declare a cpp executable
-add_executable(algorithm src/algorithm.cpp)
-target_link_libraries(algorithm ${catkin_LIBRARIES})
+# add_executable(rgbd_tools_node src/rgbd_tools_node.cpp)
+#add_executable(test1 src/test1.cpp)
+#target_link_libraries(test1 ${catkin_LIBRARIES})
+
+#add_executable(image_converter src/image_converter.cpp)
+#target_link_libraries(image_converter ${catkin_LIBRARIES})
+
+#add_executable(simplecanny src/simplecanny.cpp)
+#target_link_libraries(simplecanny ${catkin_LIBRARIES})
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(robot_path_planning_node robot_path_planning_generate_messages_cpp)
+# add_dependencies(rgbd_tools_node rgbd_tools_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(robot_path_planning_node
+# target_link_libraries(rgbd_tools_node
 #   ${catkin_LIBRARIES}
 # )
 
@@ -136,12 +135,12 @@ target_link_libraries(algorithm ${catkin_LIBRARIES})
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
 # install(PROGRAMS
-#   scripts/my_python_script
+#   scripts/
 #   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS robot_path_planning robot_path_planning_node
+# install(TARGETS rgbd_tools rgbd_tools_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -166,7 +165,7 @@ target_link_libraries(algorithm ${catkin_LIBRARIES})
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_robot_path_planning.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_rgbd_tools.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

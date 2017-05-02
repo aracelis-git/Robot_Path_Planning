@@ -35,6 +35,7 @@ Algorithm::Algorithm(const ros::NodeHandle& n)
 void Algorithm::scanCallback(const sensor_msgs::LaserScan::ConstPtr& dist)
 {
   range = dist->ranges[320];
+  ROS_INFO("%f", range);
 }
 
 void Algorithm::runAlgo()
