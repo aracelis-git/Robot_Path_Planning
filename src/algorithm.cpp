@@ -35,7 +35,6 @@ Algorithm::Algorithm(const ros::NodeHandle& n)
 void Algorithm::scanCallback(const sensor_msgs::LaserScan::ConstPtr& dist)
 {
   range = dist->ranges[320];
-  ROS_INFO("%f", range);
 }
 
 void Algorithm::runAlgo()
@@ -44,16 +43,19 @@ void Algorithm::runAlgo()
   if (range != range || range >= 0.5)
   {
     linear_ = 2.0;
+    angular_ = 0.0;
   }
   else if (range < 0.5)
   {
-    angular_ = 2.0;
+    linear_ = 0.0;
+	angular_ = 2.0;
   }
   else
   {
 	linear_ = 0.0;
 	angular_ = 0.0;
   }
+  ROS_INFO("%f", range);
 
   geometry_msgs::Twist twist;
   twist.angular.z = ascale_*angular_;
