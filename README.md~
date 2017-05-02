@@ -5,7 +5,7 @@
 
 ## SIP
 
-<a href="https://drive.google.com/open?id=1vPMsvtIHx467KGZdfskSs1heT60qLzy87K0tlMnckY4">SIP Logs</a>
+<a href="https://drive.google.com/open?id=1vPMsvtIHx467KGZdfskSs1heT60qLzy87K0tlMnckY4">SIP and Sprint Logs</a>
 
 ## License
 
@@ -27,6 +27,8 @@ Copyright 2017 Aldrin I. Racelis
 
 No Dependencies
 
+## Issues or Bugs
+
 ## Build
 
 After cloning the repository, build the file using cmake and make. 
@@ -47,4 +49,6 @@ Unit tests made with gtest verfied the functions of both the game and gameBoard 
 	test/cpp-test
 	
 The unit tests are integrated with Travis, as seen by the badge at the top of the readme.
+
+## API 
 	

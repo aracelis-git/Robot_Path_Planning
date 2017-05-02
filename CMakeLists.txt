@@ -103,7 +103,8 @@ include_directories(
 # )
 
 ## Declare a cpp executable
-# add_executable(robot_path_planning_node src/robot_path_planning_node.cpp)
+add_executable(algorithm src/algorithm.cpp)
+target_link_libraries(algorithm ${catkin_LIBRARIES})
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes

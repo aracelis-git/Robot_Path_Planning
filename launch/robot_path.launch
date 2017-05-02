@@ -1,0 +1,8 @@
+<launch>
+
+  <node pkg="robot_path_planning" name="walk" type="algorithm"/>
+  
+  <include file="$(find turtlebot_gazebo)/launch/turtlebot_world.launch">
+  </include>
+ 
+</launch>
