@@ -29,7 +29,10 @@ Algorithm::Algorithm(const ros::NodeHandle& n)
 	  ascale_(1.0)
 {
   scan_sub_ = n_.subscribe("scan", 1000, &Algorithm::scanCallback, this);
-  twist_pub_ = n_.advertise<geometry_msgs::Twist>("/cmd_vel", 1);
+  twist_pub_ = n_.advertise<geometry_msgs::Twist>("mobile_base/commands/velocity", 5);
+  if (ros::ok()) {
+  ROS_INFO("it works!");
+  }
 }
 
 void Algorithm::scanCallback(const sensor_msgs::LaserScan::ConstPtr& dist)
@@ -65,10 +68,10 @@ void Algorithm::runAlgo()
 
 int main(int argc, char** argv)
 {
+  ROS_INFO("it works!");
   ros::init(argc, argv, "walker_algorithm");
   Algorithm walker_algorithm(ros::NodeHandle(""));
-  while (ros::ok())
-  {
+  while (ros::ok()) {
     walker_algorithm.runAlgo();
   }
 
