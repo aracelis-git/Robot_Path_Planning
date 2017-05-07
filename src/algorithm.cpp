@@ -43,15 +43,15 @@ void Algorithm::scanCallback(const sensor_msgs::LaserScan::ConstPtr& dist)
 void Algorithm::runAlgo()
 {
   ros::spinOnce();
-  if (range != range || range >= 0.5)
+  if (range != range || range >= 0.2)
   {
     linear_ = 2.0;
     angular_ = 0.0;
   }
-  else if (range < 0.5)
+  else if (range < 0.2)
   {
     linear_ = 0.0;
-	angular_ = 2.0;
+	angular_ = 1.0;
   }
   else
   {
