@@ -1,15 +1,8 @@
-/** \file TwoRooms.cc
-    Implements a two room gridworld domain, with possible action delays or
-    multiple goals (with partial observability).
-    \author Todd Hester
-*/
-
-
 #include "../include/corridor.h"
 
 Corridor::Corridor(Random &rand, bool rewardType):
   grid(create_default_map()),
-  goal(coord_t(1.,1.)),
+  goal(coord_t(7.,7.)),
   negReward(rewardType),
   rng(rand),
   doorway(coord_t(2.,5.)),
@@ -23,7 +16,7 @@ Corridor::Corridor(Random &rand, bool rewardType):
 
 Corridor::~Corridor() { delete grid; }
 
-const std::vector<float> &Environment::sensation() const {
+const std::vector<float> &Corridor::sensation() const {
   //cout << "At state " << s[0] << ", " << s[1] << endl;
 
   return s;
@@ -31,48 +24,50 @@ const std::vector<float> &Environment::sensation() const {
 
 float Corridor::apply(int action) {
 
-  //cout << "Taking action " << static_cast<room_action_t>(action) << endl;
-
   int actUsed = action;
 
   if (actUsed > -1){
-
+    const room_action_t effect = static_cast<room_action_t>(actUsed);
     switch(effect) {
-    case NORTH:
-      if (!grid->wall(static_cast<unsigned>(ns),
-                      static_cast<unsigned>(ew),
-                      effect))
-        {
-          ++ns;
+    case FORWARD:
+      if (current_dir == NORTH) {
+        if (!grid->wall(static_cast<unsigned>(ns),
+                        static_cast<unsigned>(ew),
+                        current_dir)) {
+    	  ++ns;
         }
-      return reward();
-    case SOUTH:
-      if (!grid->wall(static_cast<unsigned>(ns),
-                      static_cast<unsigned>(ew),
-                      effect))
-        {
-          --ns;
+        return reward();
+      } else if (current_dir == WEST) {
+        if (!grid->wall(static_cast<unsigned>(ns),
+                        static_cast<unsigned>(ew),
+	  				    current_dir)) {
+        	++ew;
         }
-      return reward();
-    case EAST:
-      if (!grid->wall(static_cast<unsigned>(ns),
-                      static_cast<unsigned>(ew),
-                      effect))
-        {
-          ++ew;
-
-      return reward();
-    case WEST:
-      if (!grid->wall(static_cast<unsigned>(ns),
-                      static_cast<unsigned>(ew),
-                      effect))
-        {
-          --ew;
+        return reward();
+      } else if (current_dir == SOUTH) {
+        if (!grid->wall(static_cast<unsigned>(ns),
+                        static_cast<unsigned>(ew),
+					    current_dir)) {
+    	  --ns;
         }
+        return reward();
+      } else if (current_dir == EAST) {
+        if (!grid->wall(static_cast<unsigned>(ns),
+                        static_cast<unsigned>(ew),
+					    current_dir)) {
+    	  ++ew;
+        }
+        return reward();
+      }
+    case TURNLEFT:
+      if (current_dir == EAST)
+    	  current_dir = NORTH;
+      else
+    	  current_dir = static_cast<robot_direction>(static_cast<int>(current_dir) + 1);
       return reward();
     }
 
-    std::cerr << "Unreachable point reached in TwoRooms::apply!!!\n";
+    std::cerr << "Unreachable point reached in Corridor::apply!!!\n";
   }
 
   return 0;
@@ -122,7 +117,7 @@ void Corridor::reset() {
 
 
 int Corridor::getNumActions(){
-  return 4;
+  return 2;
 }
 
 
@@ -144,36 +139,32 @@ const Gridworld *Corridor::create_default_map() {
       nsv[1][j] = true;
       nsv[3][j] = true;
       nsv[5][j] = true;
+    }
   }
-
   // add a doorway
   doorway = coord_t(2, 5);
   return new Gridworld(height, width, nsv, ewv);
 }
 
-void Corridor::getMinMaxFeatures(std::vector<float> *minFeat,
-                                 std::vector<float> *maxFeat){
-
+void Corridor::getMinMaxFeatures(std::vector<float> *minFeat, std::vector<float> *maxFeat) {
   minFeat->resize(s.size(), 0.0);
   maxFeat->resize(s.size(), 10.0);
 
   (*maxFeat)[0] = 5.0;
-
 }
 
-void Corridor::getMinMaxReward(float *minR,
-                              float *maxR){
-  if (negReward){
+void Corridor::getMinMaxReward(float *minR, float *maxR) {
+  if (negReward) {
     *minR = -1.0;
     *maxR = 0.0;
-  }else{
+  } else {
     *minR = 0.0;
     *maxR = 1.0;
   }
 }
 
 
-std::vector<experience> Environment::getSeedings() {
+std::vector<experience> Corridor::getSeedings() {
 
   // return seedings
   std::vector<experience> seeds;
@@ -183,23 +174,12 @@ std::vector<experience> Environment::getSeedings() {
   // REMOVE THIS TO USE SEEDINGS
 
   // single seed of terminal state
-  useGoal2 = false;
   actHistory.clear();
-  actHistory.assign(actDelay, SOUTH);
-  seeds.push_back(getExp(2,1,SOUTH));
-
-  // possible seed of 2nd goal
-  if (multiGoal){
-    useGoal2 = true;
-    actHistory.clear();
-    actHistory.assign(actDelay, NORTH);
-    seeds.push_back(getExp(3,1,NORTH));
-  }
+  seeds.push_back(getExp(6,6,TURNLEFT));
 
   // single seed of doorway
   actHistory.clear();
-  actHistory.assign(actDelay, WEST);
-  seeds.push_back(getExp(2,6,WEST));
+  seeds.push_back(getExp(2,1,FORWARD));
 
   reset();
 
@@ -223,11 +203,6 @@ experience Corridor::getExp(float s0, float s1, int a){
 
   e.terminal = terminal();
   e.next = sensation();
-
-  /*
-  cout << "Seed from " << e.s[0] << "," << e.s[1] << " a: " << e.act
-       << " r: " << e.reward << " term: " << e.terminal << endl;
-  */
 
   reset();
 
