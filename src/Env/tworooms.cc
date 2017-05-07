@@ -29,14 +29,14 @@ TwoRooms::TwoRooms(Random &rand, bool stochastic, bool rewardType,
 TwoRooms::~TwoRooms() { delete grid; }
 
 const std::vector<float> &TwoRooms::sensation() const { 
-  //cout << "At state " << s[0] << ", " << s[1] << endl;
+  cout << "At state " << s[0] << ", " << s[1] << endl;
 
   return s; 
 }
 
 float TwoRooms::apply(int action) {
 
-  //cout << "Taking action " << static_cast<room_action_t>(action) << endl;
+  cout << "Taking action " << static_cast<room_action_t>(action) << endl;
 
   int actUsed = action;
 

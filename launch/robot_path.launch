@@ -1,6 +1,10 @@
 <launch>
 
   <node pkg="robot_path_planning" name="walk" type="algorithm"/>
+  <node pkg="robot_path_planning" name="QLearning" type="agent"
+    args="--agent qlearner --filename policies/qlearningpolicy.txt"/>
+  <node pkg="robot_path_planning" name="CorridorEnv" type="env"
+    args="--env corridor"/>
   
   <include file="$(find robot_path_planning)/launch/turtlebot_world.launch">
   </include>

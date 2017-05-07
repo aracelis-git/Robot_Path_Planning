@@ -1,3 +1,9 @@
+/**
+ * @author    Todd Hester
+ * @file      agent.cpp
+ * @brief     Runs reinforcement learning (RL) agents
+ */
+
 #include <ros/ros.h>
 
 #include <rl_msgs/RLStateReward.h>

@@ -129,11 +129,61 @@ add_library(envlib
   src/corridor.cpp
 )
 
+add_library(agentlib
+  src/Agent/DiscretizationAgent.cc
+  src/Agent/QLearner.cc
+  src/Agent/ModelBasedAgent.cc
+  src/Agent/SavedPolicy.cc
+  src/Agent/Dyna.cc
+  src/Agent/Sarsa.cc
+  src/Models/FactoredModel.cc
+  src/Models/M5Tree.cc
+  src/Models/LinearSplitsTree.cc
+  src/Models/C45Tree.cc
+  src/Models/Stump.cc
+  src/Models/MultipleClassifiers.cc
+  src/Models/ExplorationModel.cc
+  src/Models/RMaxModel.cc
+  src/Models/SepPlanExplore.cc
+  src/Planners/ValueIteration.cc
+  src/Planners/PolicyIteration.cc
+  src/Planners/PrioritizedSweeping.cc
+  src/Planners/ETUCT.cc
+  src/Planners/PO_ParallelETUCT.cc
+  src/Planners/ParallelETUCT.cc
+  src/Planners/PO_ETUCT.cc
+  src/Planners/MBS.cc
+  src/newmat/newmat1.cc
+  src/newmat/newmat2.cc
+  src/newmat/newmat3.cc
+  src/newmat/newmat4.cc
+  src/newmat/newmat5.cc
+  src/newmat/newmat6.cc
+  src/newmat/newmat7.cc
+  src/newmat/newmat8.cc
+  src/newmat/newmatex.cc
+  src/newmat/bandmat.cc
+  src/newmat/submat.cc
+  src/newmat/myexcept.cc
+  src/newmat/cholesky.cc
+  src/newmat/evalue.cc
+  src/newmat/fft.cc
+  src/newmat/hholder.cc
+  src/newmat/jacobi.cc
+  src/newmat/newfft.cc
+  src/newmat/sort.cc
+  src/newmat/svd.cc
+  src/newmat/newmatrm.cc
+  src/newmat/newmat9.cc
+)
+
 ## Declare a cpp executable
 add_executable(algorithm src/algorithm.cpp)
 target_link_libraries(algorithm ${catkin_LIBRARIES})
 add_executable(env src/env.cpp)
 target_link_libraries(env envlib ${catkin_LIBRARIES})
+add_executable(agent src/agent.cpp)
+target_link_libraries(agent agentlib ${catkin_LIBRARIES})
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -183,11 +233,22 @@ target_link_libraries(env envlib ${catkin_LIBRARIES})
 ## Testing ##
 #############
 
-## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_robot_path_planning.cpp)
-# if(TARGET ${PROJECT_NAME}-test)
-#   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
-# endif()
+#if(CATKIN_ENABLE_TESTING)
+#  find_package(rostest REQUIRED)
+#
+#  add_rostest_gtest (
+#  test
+#  test/test.cpp
+#  )
+#  target_link_libraries (
+#  test
+#  ${catkin_LIBRARIES}
+#  )
+#  add_dependencies(
+#  test
+#  algorithm
+#  ${PROJECT_NAME}_generate_messages_cpp
+#  ${catkin_EXPORTED_TARGETS}
+#  )
+#endif()
 
-## Add folders to be run by python nosetests
-# catkin_add_nosetests(test)

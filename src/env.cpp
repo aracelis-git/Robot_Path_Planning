@@ -1,3 +1,10 @@
+/**
+ * @authors   Todd Hester, Aldrin Racelis
+ * @copyright Aldrin Racelis (c)2017
+ * @file      env.cpp
+ * @brief     Runs reinforcement learning (RL) environments
+ */
+
 #include <ros/ros.h>
 #include "std_msgs/String.h"
 
