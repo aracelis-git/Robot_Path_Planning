@@ -9,23 +9,27 @@ language: cpp
 matrix:
   include:
     - os: linux
-      compiler: gcc
-      addons:
-        apt:
-          sources:
+compiler: gcc
+addons:
+apt:
+sources:
             - ubuntu-toolchain-r-test
             - george-edison55-precise-backports
-          packages:
+ packages:
             - g++-5
             - cmake
             - cmake-data
-      env: COMPILER=g++-5
+env: COMPILER=g++-5
+env:
+  matrix:
+    - USE_DEB=true  ROS_DISTRO="indigo" ROS_REPOSITORY_PATH=http://packages.ros.org/ros/ubuntu
+    - USE_DEB=true  ROS_DISTRO="indigo" ROS_REPOSITORY_PATH=http://packages.ros.org/ros-shadow-fixed/ubuntu
 before_install:
   - pip install --user cpp-coveralls
 install:
   - git clone https://github.com/ros-industrial/industrial_ci.git .ci_config
 script:
-  - .ci_config/travis.sh
+  - source .ci_config/travis.sh
 after_success:
   - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
 notifications:
