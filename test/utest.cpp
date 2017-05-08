@@ -7,24 +7,17 @@
 
 #include <ros/ros.h>
 #include <ros/service_client.h>
+#include <corridor.h>
 #include <gtest/gtest.h>
 
-std::shared_ptr<ros::NodeHandle> nh;
-
-TEST(TESTSuite, checkMessage)
-{
- // ros::ServiceClient client = nh->serviceClient<Robot_Path_Planning::algorithm>(
-//      "algorithm");
- // bool exists(client.waitForExistence(ros::Duration(1)));
-//  EXPECT_TRUE(exists);
-
-
- // EXPECT_EQ(srv.response.sum, 5+8);
+TEST(TESTSuite, checkClass) {
+  Random rng;
+  rng = Random(1+1);
+  Corridor thistest(rng, true);
+  EXPECT_EQ(thistest.apply(1),-1);
 }
 
 int main(int argc, char **argv) {
-  ros::init(argc, argv, "algorithm");
-  nh.reset(new ros::NodeHandle);
   testing::InitGoogleTest(&argc, argv);
   return RUN_ALL_TESTS();
 }

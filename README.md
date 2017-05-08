@@ -31,6 +31,8 @@ Turtlebot
 Gazebo
 Reinforcement Learning
 
+This package has been tested with Ubuntu 14.04 and ROS Indigo.
+
 ## Issues or Bugs
 
 ## Build

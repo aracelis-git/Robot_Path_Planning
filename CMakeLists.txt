@@ -233,22 +233,39 @@ target_link_libraries(agent agentlib ${catkin_LIBRARIES})
 ## Testing ##
 #############
 
-#if(CATKIN_ENABLE_TESTING)
-#  find_package(rostest REQUIRED)
-#
+find_package(GTest REQUIRED)
+include_directories(
+  include/${robot_path_planning}
+  ${catkin_INCLUDE_DIRS}
+  ${GTEST_INCLUDE_DIRS} 
+)
+
+if(CATKIN_ENABLE_TESTING)
+  catkin_add_gtest(utest test/utest.cpp)
+  target_link_libraries(utest envlib ${catkin_LIBRARIES})
+endif()
+
+if(CATKIN_ENABLE_TESTING)
+  find_package(rostest REQUIRED)
+  
+
+
 #  add_rostest_gtest (
-#  test
-#  test/test.cpp
+#  atest
+#  test/utest.test
+#  test/utest.cpp
 #  )
 #  target_link_libraries (
-#  test
+#  atest
+#  #src/algorithm.cpp
 #  ${catkin_LIBRARIES}
 #  )
 #  add_dependencies(
-#  test
+#  atest
 #  algorithm
+#  envlib
 #  ${PROJECT_NAME}_generate_messages_cpp
 #  ${catkin_EXPORTED_TARGETS}
 #  )
-#endif()
+endif()
 

@@ -9,17 +9,17 @@ language: cpp
 matrix:
   include:
     - os: linux
-compiler: gcc
-addons:
-apt:
-sources:
+      compiler: gcc
+      addons:
+        apt:
+          sources:
             - ubuntu-toolchain-r-test
             - george-edison55-precise-backports
- packages:
+          packages:
             - g++-5
             - cmake
             - cmake-data
-env: COMPILER=g++-5
+      env: COMPILER=g++-5
 before_install:
   - pip install --user cpp-coveralls
 install:

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="robot_path_planning" name="testing"  type="algorithm" />
+  <test pkg="robot_path_planning" test-name="testing" type="test" />
+</launch>
+
