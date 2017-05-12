@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<chapter xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Robot_Path_Planning</title>
+
+<para><link xlink:href="https://travis-ci.org/aracelis-git/Robot_Path_Planning">![Build Status](https://travis-ci.org/aracelis-git/Robot_Path_Planning.svg?branch=master)</link> <informaltable frame='bottom'><tgroup cols='1'><colspec align='center'/><tbody><row><entry align='center'>
+</entry></row></tbody></tgroup></informaltable>
+</para>
+
+<para><formalpara><title>Overview</title></formalpara>
+</para>
+
+<para>This ROS package provides a way for a robot to navigate a room by itself through self training. Using Q-learning, the robot navigates the room given a set reward and a learning rate constant.</para>
+
+<para><formalpara><title>SIP</title></formalpara>
+</para>
+
+<para><link xlink:href="https://drive.google.com/open?id=1vPMsvtIHx467KGZdfskSs1heT60qLzy87K0tlMnckY4">SIP Logs</link></para>
+
+<para><link xlink:href="https://drive.google.com/open?id=1AiFwYDx-4b8577_lUeq3aE7R47sUl6ZOjDB4g3GRvhU ">Sprint Log </link></para>
+
+<para><formalpara><title>License</title></formalpara>
+</para>
+
+<para>Copyright 2017 Aldrin I. Racelis</para>
+
+<para>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not use this file except in compliance with the License. You may obtain a copy of the License at</para>
+
+<para><link xlink:href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</link></para>
+
+<para>Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.</para>
+
+<para><formalpara><title>Dependencies</title></formalpara>
+</para>
+
+<para>Turtlebot Gazebo Reinforcement Learning</para>
+
+<para>This package has been tested with Ubuntu 14.04 and ROS Indigo.</para>
+
+<para><formalpara><title>Issues or Bugs</title></formalpara>
+</para>
+
+<para>Travis is not working correctly with the ROS testing.</para>
+
+<para><formalpara><title>Build</title></formalpara>
+</para>
+
+<para>After cloning the repository, do the following in the root directory:</para>
+
+<para>catkin_make roslaunch robot_path_planning robot_path.launch</para>
+
+<para><formalpara><title>Tests</title></formalpara>
+</para>
+
+<para>Unit tests made with gtest verified the code. To run the test, execute the following code in the root directory.</para>
+
+<para>catkin_make run_tests_robot_path_planning</para>
+
+<para>The unit tests are integrated with Travis, as seen by the badge at the top of the readme.</para>
+
+<para><formalpara><title>API</title></formalpara>
+</para>
+
+</chapter>
