@@ -119,7 +119,7 @@ void processState(const rl_msgs::RLStateReward::ConstPtr &stateIn){
     // if terminal, no action, but calculate reward sum
     if (stateIn->terminal){
       agent->last_action(stateIn->reward);
-      cout << "Episode " << info.episode_number << " reward: " << info.episode_reward << endl;
+      ROS_INFO("Episode %d reward: %.0f ", info.episode_number, info.episode_reward);
       // publish episode reward message
       out_exp_info.publish(info);
       info.episode_number++;

@@ -10,6 +10,7 @@
 
 #include <rl_common/Random.h>
 #include <rl_common/core.hh>
+#include <ros/ros.h>
 #include <set>
 #include <deque>
 #include <vector>

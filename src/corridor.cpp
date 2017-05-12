@@ -44,9 +44,8 @@ const std::vector<float> &Corridor::sensation() const {
  * @param action taken
  */
 float Corridor::apply(int action) {
-  cout << "Taking action " << static_cast<room_action_t>(action) << endl;
-  cout << "Current Direction " << static_cast<robot_direction>(current_dir) <<
-      endl;
+  ROS_INFO("Taking action %d ", static_cast<room_action_t>(action));
+  ROS_INFO("Current Direction %d ", static_cast<robot_direction>(current_dir));
 
   int actUsed = action;
 

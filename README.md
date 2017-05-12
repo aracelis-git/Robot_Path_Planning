@@ -3,6 +3,10 @@
 
 ---
 
+## Overview
+
+This ROS package provides a way for a robot to navigate a room by itself through self training. Using Q-learning, the robot navigates the room given a set reward and a learning rate constant. 
+
 ## SIP
 
 <a href="https://drive.google.com/open?id=1vPMsvtIHx467KGZdfskSs1heT60qLzy87K0tlMnckY4">SIP Logs</a>
@@ -35,14 +39,14 @@ This package has been tested with Ubuntu 14.04 and ROS Indigo.
 
 ## Issues or Bugs
 
+Travis is not working correctly with the ROS testing. 
+
 ## Build
 
-After cloning the repository, build the file using cmake and make. 
-
-	mkdir build
-	cd build
-	cmake ..
-	make
+After cloning the repository, do the following in the root directory: 
+	
+	catkin_make
+	roslaunch robot_path_planning robot_path.launch
 	
 ## Tests
 
