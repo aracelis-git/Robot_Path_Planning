@@ -1,22 +1,13 @@
-# We need a decent ubuntu dist
-sudo: required
-dist: trusty
-
-# Modern cpp settings from
-#  http://genbattle.bitbucket.org/blog/2016/01/17/c++-travis-ci/
-
-language: cpp
-matrix:
-  include:
-    - os: linux
-compiler: gcc
-
+sudo: required 
+dist: trusty 
+language: generic 
+compiler:
+  - gcc
 env:
   matrix:
     - USE_DEB=true  ROS_DISTRO="indigo" ROS_REPOSITORY_PATH=http://packages.ros.org/ros/ubuntu
     - USE_DEB=true  ROS_DISTRO="indigo" ROS_REPOSITORY_PATH=http://packages.ros.org/ros-shadow-fixed/ubuntu
-
 install:
-  - git clone https://github.com/ros-industrial/industrial_ci.git .ci_config
-script:
+  - git clone https://github.com/ros-industrial/industrial_ci.git .ci_config  
+script: 
   - source .ci_config/travis.sh

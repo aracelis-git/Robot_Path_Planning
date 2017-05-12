@@ -46,13 +46,9 @@ After cloning the repository, build the file using cmake and make.
 	
 ## Tests
 
-Unit tests made with gtest verfied the functions of both the game and gameBoard classes. To run the test, execute the following code in the root directory.
+Unit tests made with gtest verified the code. To run the test, execute the following code in the root directory.
 
-	mkdir build
-	cd build
-	cmake ..
-	make
-	test/cpp-test
+	catkin_make run_tests_robot_path_planning
 	
 The unit tests are integrated with Travis, as seen by the badge at the top of the readme.
 
